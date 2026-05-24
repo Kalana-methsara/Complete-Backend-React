@@ -49,11 +49,14 @@ export const getAllBlogs = asyncHandler(async (req: Request, res: Response) => {
   ])
 
   res.status(200).json({
-    data: blogs,
-    totalPage: Math.ceil(totalDataCount / limit),
-    totalDataCount,
-    page,
-  })
+  data: blogs,
+  pagination: {
+    totalData: totalDataCount,
+    totalPages: Math.ceil(totalDataCount / limit),
+    currentPage: page,
+    limit,
+  },
+})
 })
 
 // ─── GET MY BLOGS (ADMIN, MANAGER — own blogs) ─────────────
@@ -71,12 +74,15 @@ export const getMyBlogs = asyncHandler(async (req: AuthRequest, res: Response) =
     BlogModel.countDocuments({ author: req.user?._id })
   ])
 
-  res.status(200).json({
-    data: blogs,
-    totalPage: Math.ceil(totalDataCount / limit),
-    totalDataCount,
-    page,
-  })
+res.status(200).json({
+  data: blogs,
+  pagination: {
+    totalData: totalDataCount,
+    totalPages: Math.ceil(totalDataCount / limit),
+    currentPage: page,
+    limit,
+  },
+})
 })
 
 // ─── UPDATE BLOG ──────────────────────────────────────────
