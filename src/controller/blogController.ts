@@ -14,7 +14,11 @@ export const saveBlog = asyncHandler(async (req: AuthRequest, res: Response) => 
   if (req.file) {
     const result: any = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
-        { folder: "blog" },
+        { folder: "blog",
+          transformation: [ // මෙය මගින් upload වෙන ගමන්ම compress කරන්න පුළුවන්
+          { width: 800, crop: "scale", quality: "auto", fetch_format: "auto" }
+        ]
+         },
         (error, result) => (error ? reject(error) : resolve(result))
       )
       uploadStream.end(req.file?.buffer)
@@ -120,7 +124,8 @@ export const updateBlog = asyncHandler(async (req: AuthRequest, res: Response) =
   const updatedBlog = await BlogModel.findByIdAndUpdate(
     id,
     { title, content, imageURL: imageUrl },
-    { new: true }
+    { returnDocument: 'after' }
+
   );
 
   res.status(200).json({ message: "Blog updated successfully!", data: updatedBlog });
