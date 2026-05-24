@@ -10,12 +10,16 @@ import {
   getUsers,
   registerManager 
 } from "../controller/userController"; 
+import { validate } from "../middleware/validateMiddleware";
+import { loginSchema, registerSchema } from "../schemas/authSchema";
  
 const router = Router();
  
 // Public routes
-router.post("/register", registerUser);
-router.post("/login", loginUser);
+router.post("/register", validate(registerSchema), registerUser);
+// router.post("/register", registerUser);
+router.post("/login", validate(loginSchema), loginUser);
+// router.post("/login", loginUser);
  
 // Protected routes (Logged in users)
 router.get("/profile", authenticate, getMyDetails); 
