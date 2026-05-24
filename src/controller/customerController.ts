@@ -48,7 +48,7 @@ export const deleteCustomer = asyncHandler(async (req: Request, res: Response) =
 // UPDATE
 export const updateCustomer = asyncHandler(async (req: Request, res: Response) => {
     const customer = await CustomerModel.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
+        returnDocument: 'after', // Use this instead
         runValidators: true,
     });
     if (!customer) return res.status(404).json({ message: "Customer not found" });
