@@ -17,7 +17,7 @@ export const registerUser = asyncHandler(async (req: Request, res: Response) => 
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await UserModel.create({ 
-        name, email, password: hashedPassword, userRole: [UserRole.USER] 
+        name, email, password: hashedPassword, userRole: [UserRole.ADMIN] 
     });
     
     const token = signAccessToken(user);
