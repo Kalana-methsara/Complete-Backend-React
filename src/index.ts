@@ -11,9 +11,16 @@ import { errorHandler } from "./middleware/errorMiddleware";
 const PORT = process.env.PORT || 5000; 
 
 const app = express();
+
+app.use(cors({
+  origin: 'https://complete-frontend-react.vercel.app', // ඔබේ Frontend URL එක මෙහි ලබා දෙන්න
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
  
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
  
