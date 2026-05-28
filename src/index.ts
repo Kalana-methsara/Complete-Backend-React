@@ -4,6 +4,7 @@ import customerRouter from "./routers/customerRouter";
 import userRouter from "./routers/userRouter";
 import authRouter from "./routers/userRouter";
 import blogRouter from "./routers/blogRouter"
+import aiRoutes from "./routers/aiRoutes"
 import mongoDB from "./config/db";
 import { errorHandler } from "./middleware/errorMiddleware";
   
@@ -20,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/customer", customerRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/blog", blogRouter)
+app.use("/api/v1/ai", aiRoutes)
+
 
 // index.ts හි routes සියල්ලටම පසුව
 app.use(errorHandler);
