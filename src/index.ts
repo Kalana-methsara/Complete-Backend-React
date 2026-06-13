@@ -12,12 +12,14 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(cors({
-  origin: 'https://complete-frontend-react.vercel.app', // ඔබේ Frontend URL එක මෙහි ලබා දෙන්න
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: "https://freelancefluxo-web.vercel.app", // ඔයාගේ Frontend Live URL එක විතරක් දෙන්න
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Cookies හෝ Auth Headers යවනවා නම් මේක අනිවාර්යයි
+  })
+);
  
 // Middleware
 // app.use(cors());
